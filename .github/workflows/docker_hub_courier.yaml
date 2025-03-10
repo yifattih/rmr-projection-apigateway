@@ -10,7 +10,7 @@ on:
 
 env:
   SERVICE_NAME: 'apigateway'
-  OTLP_ENDPOINT: 'localhost:4317'
+  OTLP_ENDPOINT: 'alloy:4317'
 
 jobs:
   docker:
