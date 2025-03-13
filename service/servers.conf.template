@@ -10,7 +10,7 @@ server {
         otel_trace on;
         otel_trace_context propagate;
 
-        proxy_pass ${UI_SERVICE};
+        proxy_pass ${UI_SERVICE_URL};
         include /etc/nginx/conf.d/common_headers.conf;
         add_header 'Access-Control-Allow-Methods' 'GET, OPTIONS' always;
         limit_except GET OPTIONS {
@@ -27,7 +27,7 @@ server {
         otel_trace on;
         otel_trace_context propagate;
 
-        proxy_pass ${UI_SERVICE}/static/;
+        proxy_pass ${UI_SERVICE_URL}/static/;
         include /etc/nginx/conf.d/common_headers.conf;
         add_header 'Access-Control-Allow-Methods' 'GET, OPTIONS' always;
         limit_except GET OPTIONS {
@@ -43,7 +43,7 @@ server {
         otel_trace on;
         otel_trace_context propagate;
 
-        proxy_pass ${UI_SERVICE}/submit/;
+        proxy_pass ${UI_SERVICE_URL}/submit/;
         include /etc/nginx/conf.d/common_headers.conf;
         add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS' always;
         limit_except GET POST OPTIONS {
@@ -59,7 +59,7 @@ server {
         otel_trace on;
         otel_trace_context propagate;
 
-        proxy_pass ${API_SERVICE}/rmr/;
+        proxy_pass ${API_SERVICE_URL}/rmr/;
         include /etc/nginx/conf.d/common_headers.conf;
         add_header 'Access-Control-Allow-Methods' 'POST, OPTIONS' always;
         limit_except POST OPTIONS {
