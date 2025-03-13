@@ -10,7 +10,7 @@ COPY servers.conf.template /etc/nginx/templates/servers.conf.template
 COPY nginx.conf nginx.conf
 
 ARG OTLP_ENDPOINT
-ARG SERVICE_NAME
-RUN envsubst '${OTLP_ENDPOINT} ${SERVICE_NAME}' < nginx.conf > /etc/nginx/nginx.conf
+ARG OTEL_SERVICE_NAME
+RUN envsubst '${OTLP_ENDPOINT} ${OTEL_SERVICE_NAME}' < nginx.conf > /etc/nginx/nginx.conf
 
 EXPOSE 80
