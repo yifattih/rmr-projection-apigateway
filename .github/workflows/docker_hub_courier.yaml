@@ -9,7 +9,7 @@ on:
       - 'dev'
 
 env:
-  SERVICE_NAME: 'apigateway'
+  OTEL_SERVICE_NAME: 'apigateway'
   OTLP_ENDPOINT: 'alloy:4317'
 
 jobs:
@@ -40,7 +40,7 @@ jobs:
         with:
           context: service
           push: true
-          tags: ${{ vars.DOCKER_USERNAME }}/${{ vars.DOCKER_REPOSITORY }}:${{ env.SERVICE_NAME }}
+          tags: ${{ vars.DOCKER_USERNAME }}/${{ vars.DOCKER_REPOSITORY }}:${{ env.OTEL_SERVICE_NAME }}
           build-args: |
             OTLP_ENDPOINT=${{ env.OTLP_ENDPOINT }}
-            SERVICE_NAME=${{ env.SERVICE_NAME }}
+            OTEL_SERVICE_NAME=${{ env.OTEL_SERVICE_NAME }}
