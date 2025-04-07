@@ -1,0 +1,80 @@
+server {
+    listen 80;
+    server_name ${SERVER_NAME};
+
+    set $cors '';
+    if ($http_origin ~ '^https?://(localhost|www\.yifattih\.com|)') {
+            set $cors 'true';
+    }
+
+    include /etc/nginx/conf.d/security.conf;
+
+    location /rmrprojection {
+        otel_trace on;
+        otel_trace_context propagate;
+
+        rewrite ^/rmrprojection(.*)$ /$1 break;
+
+        include /etc/nginx/conf.d/client_info_forwarding.conf;
+
+        include /etc/nginx/conf.d/ui-auth.conf;
+
+        include /etc/nginx/conf.d/cors.conf;
+        limit_except GET OPTIONS {deny all;}
+
+        # Limiting requests to predefined zone
+        limit_req zone=ui_limit burst=5 nodelay;
+
+        proxy_pass ${UI_SERVICE_ENDPOINT};
+    }
+
+    location ^~ /static/  {
+        otel_trace on;
+        otel_trace_context propagate;
+
+        include /etc/nginx/conf.d/client_info_forwarding.conf;
+
+        include /etc/nginx/conf.d/ui-auth.conf;
+
+        include /etc/nginx/conf.d/cors.conf;
+        limit_except GET OPTIONS {deny all;}
+
+        # Limiting requests to predefined zone
+        limit_req zone=ui_limit burst=5 nodelay;
+
+        proxy_pass ${UI_SERVICE_ENDPOINT}/static/;
+    }
+
+    location ^~ /submit  {
+        otel_trace on;
+        otel_trace_context propagate;
+
+        include /etc/nginx/conf.d/client_info_forwarding.conf;
+
+        include /etc/nginx/conf.d/ui-auth.conf;
+
+        include /etc/nginx/conf.d/cors.conf;
+        limit_except POST OPTIONS {deny all;}
+
+        # Limiting requests to predefined zone
+        limit_req zone=ui_limit burst=5 nodelay;
+
+        proxy_pass ${UI_SERVICE_ENDPOINT}/submit;
+    }
+
+    location /rmrprojection/api {
+        otel_trace on;
+        otel_trace_context propagate;
+
+        include /etc/nginx/conf.d/client_info_forwarding.conf;
+        include /etc/nginx/conf.d/api-auth.conf;
+
+        include /etc/nginx/conf.d/cors.conf;
+        limit_except POST OPTIONS {deny all;}
+
+        # Limiting requests to predefined zone
+        limit_req zone=api_limit burst=5 nodelay;
+
+        proxy_pass ${API_SERVICE_ENDPOINT}/projections;
+    }
+}
