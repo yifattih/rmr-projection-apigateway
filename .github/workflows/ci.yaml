@@ -29,7 +29,7 @@ jobs:
       
       - name: Lint
         run: |
-          gixy service/*.conf --output gixy-report.txt
+          gixy service/config_modules/*.conf --output gixy-report.txt
 
       - name: Upload gixy report as an artifact
         uses: actions/upload-artifact@v4
@@ -41,7 +41,7 @@ jobs:
       
       - name: Format
         run: |
-          nginxfmt -v service/*.conf &> nginxfmt-report.txt
+          nginxfmt -v service/config_modules/*.conf &> nginxfmt-report.txt
 
       - name: Upload nginxfmt report as an artifact
         uses: actions/upload-artifact@v4
