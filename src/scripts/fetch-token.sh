@@ -6,8 +6,8 @@
 ###############################################################################
 # List of services that require identity tokens
 declare -A SERVICES_ENDPOINT
-SERVICES_ENDPOINT["API"]=${API_SERVICE_ENDPOINT}
-SERVICES_ENDPOINT["UI"]=${UI_SERVICE_ENDPOINT}
+SERVICES_ENDPOINT["API"]="${API_SERVICE_ENDPOINT}"
+SERVICES_ENDPOINT["UI"]="${UI_SERVICE_ENDPOINT}"
 
 # Function to retrieve identity token for a given service
 get_identity_token() {
@@ -24,7 +24,7 @@ get_identity_token() {
 # Function to update tokens for all services
 update_tokens() {
     for key in "${!SERVICES_ENDPOINT[@]}"; do
-        audience=$(eval echo ${SERVICES_ENDPOINT[${key}]})
+        audience=$(eval echo "${SERVICES_ENDPOINT[${key}]}")
         if [ -n "${audience}" ]; then
             token=$(get_identity_token "${audience}")
             export "${key}_TOKEN=${token}"

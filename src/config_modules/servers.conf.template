@@ -26,7 +26,8 @@ server {
         limit_req zone=ui_limit burst=5 nodelay;
 
         proxy_ssl_server_name on;
-        proxy_pass ${UI_SERVICE_ENDPOINT};
+        proxy_set_header Host ui-577926260607.us-central1.run.app;
+        proxy_pass "${UI_SERVICE_ENDPOINT}";
     }
 
     location ^~ /static/  {
@@ -44,7 +45,8 @@ server {
         limit_req zone=ui_limit burst=5 nodelay;
 
         proxy_ssl_server_name on;
-        proxy_pass ${UI_SERVICE_ENDPOINT}/static/;
+        proxy_set_header Host ui-577926260607.us-central1.run.app;
+        proxy_pass "${UI_SERVICE_ENDPOINT}"/static/;
     }
 
     location ^~ /submit  {
@@ -62,7 +64,8 @@ server {
         limit_req zone=ui_limit burst=5 nodelay;
 
         proxy_ssl_server_name on;
-        proxy_pass ${UI_SERVICE_ENDPOINT}/submit;
+        proxy_set_header Host ui-577926260607.us-central1.run.app;
+        proxy_pass "${UI_SERVICE_ENDPOINT}"/submit;
     }
 
     location /rmrprojection/api {
@@ -79,6 +82,7 @@ server {
         limit_req zone=api_limit burst=5 nodelay;
 
         proxy_ssl_server_name on;
-        proxy_pass ${API_SERVICE_ENDPOINT}/projections;
+        proxy_set_header Host api-577926260607.us-central1.run.app;
+        proxy_pass "${API_SERVICE_ENDPOINT}"/projections;
     }
 }
