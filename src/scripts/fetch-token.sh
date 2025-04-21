@@ -6,8 +6,8 @@
 ###############################################################################
 # List of services that require identity tokens
 declare -A SERVICES_ENDPOINT
-SERVICES_ENDPOINT["API"]="${API_SERVICE_ENDPOINT}"
-SERVICES_ENDPOINT["UI"]="${UI_SERVICE_ENDPOINT}"
+SERVICES_ENDPOINT["API"]=${API_SERVICE_ENDPOINT}
+SERVICES_ENDPOINT["UI"]=${UI_SERVICE_ENDPOINT}
 
 # Function to retrieve identity token for a given service
 get_identity_token() {
