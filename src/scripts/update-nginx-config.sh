@@ -16,8 +16,8 @@ update_nginx_config() {
     fi
 
     echo "Applying new token to Nginx configuration..."
-    envsubst "${API_TOKEN}" < /etc/nginx/conf.d/api-auth.conf.template > /etc/nginx/conf.d/api-auth.conf
-    envsubst "${UI_TOKEN}" < /etc/nginx/conf.d/ui-auth.conf.template > /etc/nginx/conf.d/ui-auth.conf
+    envsubst '${API_TOKEN}' < /etc/nginx/conf.d/api-auth.conf.template > /etc/nginx/conf.d/api-auth.conf
+    envsubst '${UI_TOKEN}' < /etc/nginx/conf.d/ui-auth.conf.template > /etc/nginx/conf.d/ui-auth.conf
 
     # Reload Nginx to apply changes
     nginx -s reload
