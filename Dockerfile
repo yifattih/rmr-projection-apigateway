@@ -1,5 +1,5 @@
 # FROM nginx:otel
-FROM nginx:stable-alpine3.20-otel@sha256:02a1e29f7b93e643c5d5ca202ab50616222aacc4a84a9522ea85bb5e50bb079a
+FROM nginx:stable-alpine3.20-otel
 
 RUN apk add --no-cache \
     bash \
