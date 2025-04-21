@@ -25,6 +25,7 @@ server {
         # Limiting requests to predefined zone
         limit_req zone=ui_limit burst=5 nodelay;
 
+        proxy_ssl_server_name on;
         proxy_pass ${UI_SERVICE_ENDPOINT};
     }
 
@@ -42,6 +43,7 @@ server {
         # Limiting requests to predefined zone
         limit_req zone=ui_limit burst=5 nodelay;
 
+        proxy_ssl_server_name on;
         proxy_pass ${UI_SERVICE_ENDPOINT}/static/;
     }
 
@@ -59,6 +61,7 @@ server {
         # Limiting requests to predefined zone
         limit_req zone=ui_limit burst=5 nodelay;
 
+        proxy_ssl_server_name on;
         proxy_pass ${UI_SERVICE_ENDPOINT}/submit;
     }
 
@@ -75,6 +78,7 @@ server {
         # Limiting requests to predefined zone
         limit_req zone=api_limit burst=5 nodelay;
 
+        proxy_ssl_server_name on;
         proxy_pass ${API_SERVICE_ENDPOINT}/projections;
     }
 }
