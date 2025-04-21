@@ -13,6 +13,8 @@ server {
         otel_trace on;
         otel_trace_context propagate;
 
+        resolver 8.8.8.8;
+        
         rewrite ^/rmrprojection(.*)$ /$1 break;
 
         include /etc/nginx/conf.d/client_info_forwarding.conf;
