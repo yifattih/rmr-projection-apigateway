@@ -39,7 +39,7 @@ ARG OTEL_SERVICE_NAME
 
 # Use envsubst to substitute the environment variables in the nginx.conf template
 # and generate the final nginx configuration file
-RUN envsubst "${OTLP_ENDPOINT} ${OTEL_SERVICE_NAME}" < nginx.conf > /etc/nginx/nginx.conf
+RUN envsubst '${OTLP_ENDPOINT} ${OTEL_SERVICE_NAME}' < nginx.conf > /etc/nginx/nginx.conf
 
 # Expose port 80 for HTTP traffic
 EXPOSE 80
